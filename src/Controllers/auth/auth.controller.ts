@@ -1,6 +1,8 @@
-import { Controller, Post, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { LocalAuthGuard } from 'src/Cores/MiddleWares/Gaurds/local-auth.guard';
+import { AnyMxRecord } from 'dns';
+import { UserLoginDto } from 'src/Cores/Models/Dto/user-sigin.Dto';
 import { AuthService } from 'src/Cores/Services/auth/auth.service';
 
 @Controller('api/auth')
@@ -12,7 +14,7 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('/signin')
-  async signIn(@Request() req) {
+  async signIn(@Request() req, @Body() payload: UserLoginDto ) {
     return this._authService.signIn(req.user);
   }
 }

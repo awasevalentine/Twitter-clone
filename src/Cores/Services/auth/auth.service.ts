@@ -10,23 +10,29 @@ export class AuthService {
   constructor(private readonly _userService: UserService, private jwtService: JwtService) { }
 
   async validateUser(email: string, password: string): Promise<User> {
+    const user = await this._userService.getUser(email);
+    if (!user) {
+      return null;
+    }
+    const valid = bcrypt.compare(password, user.password).then(
+      (validUser) => {
 
-    const user: User = await this._userService.getUser(email).then(
-      (data) => {
-        const valid = bcrypt.compare(password, data.password);
-        if (valid) {
-          return data;
+        if (validUser) {
+          return user;
+        } else {
+          
+          return null;
         }
-        return null;
       },
       (err) => {
-        throw new Error(err);
+          throw new ErrorEvent(`email and password not correct `);
       }
-    )
-    return await user;
+    );
+    return valid;
   }
 
-  async signIn(user: User) {
+
+  async signIn(user: any) {
     const payload = { email: user.email, UserId: user.user_Id, fullName: user.fullName, date_Created: user.date_Created};
     return {
       accessToken: this.jwtService.sign(payload)
