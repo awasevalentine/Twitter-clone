@@ -33,7 +33,7 @@ import { UserService } from './Core/Services/user/user.service';
       synchronize: false,
     }),
     TypeOrmModule.forFeature([TwitComment, Twit, User]),
-    PassportModule,
+    PassportModule.register({defaultStrategy: 'jwt'}),
     JwtModule.register({
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '60m' },

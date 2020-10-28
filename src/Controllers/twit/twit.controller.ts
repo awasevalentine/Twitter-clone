@@ -1,3 +1,4 @@
+import { JwtAuthGuard } from './../../Core/MiddleWares/Gaurds/jwt-auth.guardd';
 import { TwitCommentCreateDTo, TwitCreateDto } from './../../Core/Models/Dto/twit.Dto';
 import { TwitService } from './../../Core/Services/twit/twit.service';
 import { Body, Controller, Delete, Get, Param, Post, Req, Res, UseGuards } from '@nestjs/common';
@@ -13,51 +14,51 @@ export class TwitController {
     constructor(private _twitService: TwitService) {
         
     }
-    @UseGuards(LocalAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Get("")
     async getAlltweets(): Promise<Twit[]> {
         return this._twitService.fetchTwits();
     }
-    @UseGuards(LocalAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Get("user/:userId")
     async getUserTweets(@Param("userId") userId: string): Promise<Twit[]> {
         return this._twitService.getUserTwits(userId);
     }
 
 
-    @UseGuards(LocalAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Get(":twitId")
     async getTwitDetailsWithComments(@Param("twitId") twitId: number): Promise<Twit> {
         return this._twitService.getTwitDetails(twitId);
     }
 
 
-    @UseGuards(LocalAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Get(":twitId/comments")
     async getTwitComments(@Param("twitId") twitId: number): Promise<TwitComment[]> {
         return this._twitService.getTwitComments(twitId);
     }
 
-    @UseGuards(LocalAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Delete(":twitId/delete/:userId")
     async removeTwit(@Param("twitId") twitId: number, @Param("userId") userId: string): Promise<any> {
         return this._twitService.removeTwit(twitId, userId);
     }
 
 
-    @UseGuards(LocalAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Post("create")
     async createTwit(@Body() twitRequest: TwitCreateDto): Promise<any> {
         return this._twitService.addTwit(twitRequest);
     }
 
-    @UseGuards(LocalAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Post(":twitId/comments/add")
     async addComment(@Body() comment: TwitCommentCreateDTo, @Param("twitId") twitId: number): Promise<any> {
         return this._twitService.addComment(comment);
     }
 
-    @UseGuards(LocalAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Post(":twitId/like/:userId")
     async likeTweet(@Param("twitId") twitId: number, @Param("userId") userId: string): Promise<any> {
         return this._twitService.likeTwit(twitId, userId);
