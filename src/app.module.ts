@@ -28,7 +28,7 @@ import { UserService } from './Core/Services/user/user.service';
       port: 3306,
       username: process.env.MYSQL_USER,
       password: process.env.MYSQL_PASSWORD,
-      database: 'tweeterDb',
+      database: process.env.DB_NAME || 'tweeterDb',
       entities: [TwitComment, Twit, User],
       synchronize: false,
     }),
