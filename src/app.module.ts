@@ -8,14 +8,14 @@ import { AppService } from './app.service';
 import { AuthController } from './Controllers/auth/auth.controller';
 import { TwitController } from './Controllers/twit/twit.controller';
 import { UserController } from './Controllers/user/user.controller';
-import { JwtStrategy } from './Cores/MiddleWares/Strategies/jwt-auth.strategy';
-import { LocalStrategy } from './Cores/MiddleWares/Strategies/local-auth.strategy';
-import { TwitComment } from './Cores/Models/Entites/comment.entity';
-import { Twit } from './Cores/Models/Entites/twit.entity';
-import { User } from './Cores/Models/Entites/user.entity';
-import { AuthService } from './Cores/Services/auth/auth.service';
-import { TwitService } from './Cores/Services/twit/twit.service';
-import { UserService } from './Cores/Services/user/user.service';
+import { JwtStrategy } from './Core/MiddleWares/Strategies/jwt-auth.strategy';
+import { LocalStrategy } from './Core/MiddleWares/Strategies/local-auth.strategy';
+import { TwitComment } from './Core/Models/Entites/comment.entity';
+import { Twit } from './Core/Models/Entites/twit.entity';
+import { User } from './Core/Models/Entites/user.entity';
+import { AuthService } from './Core/Services/auth/auth.service';
+import { TwitService } from './Core/Services/twit/twit.service';
+import { UserService } from './Core/Services/user/user.service';
 
 
 

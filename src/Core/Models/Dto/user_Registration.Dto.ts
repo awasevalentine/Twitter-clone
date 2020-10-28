@@ -14,3 +14,7 @@ export class UserRegistrationDto {
   readonly password: string;
   
 }
+
+export class SignInDto {
+  
+}

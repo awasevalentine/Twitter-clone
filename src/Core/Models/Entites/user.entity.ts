@@ -1,9 +1,10 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Twit } from './twit.entity';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({name:"user"})
+@Entity({name:"users"})
 export class User {
   @PrimaryGeneratedColumn()
-  user_Id: number;
+  id: number;
 
   @Column({name: "Email"})
   email: string;
@@ -16,5 +17,8 @@ export class User {
 
   @CreateDateColumn({name: "Date_Created"})
   date_Created: Date;
+
+  @OneToMany(()=>Twit, twit => twit.user)
+  Twits: Twit[]
   
 }

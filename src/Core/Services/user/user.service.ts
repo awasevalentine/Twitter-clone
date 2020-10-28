@@ -1,7 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserRegistrationDto } from 'src/Cores/Models/Dto/user_Registration.Dto';
-import { User } from 'src/Cores/Models/Entites/user.entity';
+import { UserRegistrationDto } from 'src/Core/Models/Dto/user_Registration.Dto';
+import { User } from 'src/Core/Models/Entites/user.entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
@@ -15,7 +15,7 @@ export class UserService {
     newUser.email = userDto.email;
     newUser.fullName = userDto.fullName;
     newUser.password = await bcrypt.hash(userDto.password, 10);
-    newUser.date_Created = new Date()
+    newUser.date_Created = new Date();
 
     const user = await this._userRepository.save(newUser);
     console.log(`user successfully created -> `, user);
