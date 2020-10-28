@@ -24,7 +24,7 @@ import { UserService } from './Core/Services/user/user.service';
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: process.env.DB_HOST,
       port: 3306,
       username: process.env.MYSQL_USER,
       password: process.env.MYSQL_PASSWORD,
